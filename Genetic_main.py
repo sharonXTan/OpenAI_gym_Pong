@@ -1,3 +1,8 @@
+"""
+Train a Pong AI using Genetic algorithms.
+"""
+
+
 import gym
 def main():
     # init environment
