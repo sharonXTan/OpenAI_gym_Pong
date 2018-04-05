@@ -1,9 +1,12 @@
 import gym
 def main():
-    # initialize environment
+    # init environment
     env = gym.make("Pong-v0")
-    observation = env.reset()
-    obs_dim = len(observation)
+
+
+    # init variables for genetic algorithms 
+    generations = 10 # Number of times to evole the population.
+    population = 20 # Number of networks in each generation.
     
 
 
