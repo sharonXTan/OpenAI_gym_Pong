@@ -5,7 +5,7 @@
 In the game of Pong, the policy could take the pixels of the screen and compute the probability of moving the player’s paddle Up, Down, or neither. (https://blog.openai.com/evolution-strategies/)
 
 
-- Initial inout pixel: 210x160x3 [width 210, height 160, and with three color channels R,G,B.]
+- Initial input pixel: 210x160x3 [width 210, height 160, and with three color channels R,G,B.]
 
 Steps for processing Image before feeding to CNN (from https://medium.com/@dhruvp/how-to-write-a-neural-network-to-play-pong-from-scratch-956b57d4f6e0)
 
