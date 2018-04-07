@@ -17,3 +17,8 @@ Steps for processing Image before feeding to CNN (from https://medium.com/@dhruv
 6. Store just the difference between the current frame and the previous frame if we know the previous frame (we only care about what’s changed).
 
 
+#### Action:
+action 0 and 1 are useless, as nothing happens to the racket.
+
+action 2 & 4 makes the racket go up, and action 3 & 5 makes the racket go down.
+
