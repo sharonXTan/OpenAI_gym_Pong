@@ -43,7 +43,9 @@ def main():
         Dropout Layer: 
 
         Output Layer: fully-connected linear layer with a single output for each valid action, applies softmax activation function
+        
 
+        Refernce: https://github.com/mkturkcan/Keras-Pong/blob/master/keras_pong.py
 
         """
         model = Sequential()
