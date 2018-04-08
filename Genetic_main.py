@@ -19,11 +19,12 @@ def main():
     population = 50 # Number of networks in each generation.
 
     # init variables for CNN
+    current_pool = []
     input_dim = (80,80,1)
     learning_rate = 0.001
 
     # Initialize all models
-    for i in range(population):
+    for _ in range(population):
         """
         Keras 2.1.1; tensorflow as backend.
 
@@ -41,13 +42,13 @@ def main():
 
         Dropout Layer: 
 
-        Dense Layer: fully-connected linear layer with a single output for each valid action, applies softmax activation function
+        Output Layer: fully-connected linear layer with a single output for each valid action, applies softmax activation function
 
 
         """
         model = Sequential()
-        model.add(Conv2D(32, kernel_size = (8, 8), strides=(4, 4), padding='same', activation='relu', kernel_initializer='he_uniform',
-        input_shape=(80,80,1)))
+        model.add(Reshape((80,80,1), input_shape=(input_dim,)))
+        model.add(Conv2D(32, kernel_size = (8, 8), strides=(4, 4), padding='same', activation='relu', kernel_initializer='he_uniform'))
 
         model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
@@ -55,9 +56,23 @@ def main():
         model.add(Dense(32, activation='relu', kernel_initializer='he_uniform'))
         model.add(Dropout(0.5))
         model.add(Dense(3, activation='softmax'))
-        opt = Adam(lr=0.001)
+        opt = Adam(lr=learning_rate)
         model.compile(loss='categorical_crossentropy', optimizer=opt)
+        current_pool.append(model)
+    
+    def preprocessImage(I):
+        """ Return array of 80 x 80
+        https://github.com/mkturkcan/Keras-Pong/blob/master/keras_pong.py
+        """
+        I = I[35:195] # crop
+        I = I[::2,::2,0] # downsample by factor of 2
+        I[I == 144] = 0 # erase background (background type 1)
+        I[I == 109] = 0 # erase background (background type 2)
+        I[I != 0] = 1 # everything else (paddles, ball) just set to 1
+        return I
 
+
+    
 
 
 
