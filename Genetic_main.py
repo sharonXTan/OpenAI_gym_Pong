@@ -75,7 +75,41 @@ def main():
 
 
     
+    def fitness(reward_sum)
+		observation = env.reset()
+		action = env.action_space.sample()
+		running_reward = None
+		reward_sum = 0
+		episode_number = 0
+		drs = []
+		while True:
+			if render: 
+				 env.render()
+		# step the environment and get new measurements
+			observation, reward, done, info = env.step(action)
+			reward_sum += reward 
+			drs.append(reward) # record reward (has to be done after we call step() to get reward for previous action)
+			if done: # an episode finished
+				 episode_number += 1
+		# standardize the rewards to be unit normal (helps control the gradient estimator variance)
+		reward_sum -= np.mean(reward_sum)
+		reward_sum /= np.std(reward_sum)
+		# define fitness condition
+		fitness(reward_sum) = np.maximum(reward_sum)
+		
+		# stack together all inputs, hidden states, action gradients, and rewards for this episode
+		epr = np.vstack(drs)
+		drs = [] # reset array memory
 
+"""
+    # boring book-keeping
+    running_reward = reward_sum if running_reward is None else running_reward * 0.99 + reward_sum * 0.01
+    print 'resetting env. episode reward total was %f. running mean: %f' % (reward_sum, running_reward)
+    if episode_number % 100 == 0: pickle.dump(model, open('save.p', 'wb'))
+    reward_sum = 0
+    observation = env.reset() # reset env
+    prev_x = None
+"""
 
 
 
